@@ -80,14 +80,16 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+		if ($model->load(Yii::$app->request->post()) && $model->login()) {
+			return $this->goBack(); //New Code (BIR_NEW GROUP)
+		/* //Original Code!!
             if(Yii::$app->user->can('admin'))
             {
-                //            return $this->goBack();
-                //        Yii::$app->urlManager->createUrl('http://localhost/bir_dwts/backend/web/index.php');
+                // $this->goBack();
+                //Yii::$app->urlManager->createUrl('http://localhost/bir_dwts/backend/web/index.php');
                 return $this->goHome();
             }
-
+		*/
         } else {
             return $this->render('login', [
                 'model' => $model,
